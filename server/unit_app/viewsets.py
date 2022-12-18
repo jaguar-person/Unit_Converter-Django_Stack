@@ -1,9 +1,6 @@
 from rest_framework import viewsets
-from unit_app.models import Unit
-from unit_app.serializer import UnitSerializer
-from unit_app.models import UnitType
-from unit_app.serializer import UnitTypeSerializer
-
+from unit_app.models import Unit, UnitCategory
+from unit_app.serializer import UnitSerializer, UnitCategorySerializer
 
 class UnitViewSet(viewsets.ModelViewSet):
     serializer_class = UnitSerializer
@@ -12,8 +9,8 @@ class UnitViewSet(viewsets.ModelViewSet):
         return Unit.objects.all()
 
 
-class UnitTypeViewSet(viewsets.ModelViewSet):
-    serializer_class = UnitTypeSerializer
+class UnitCategoryViewSet(viewsets.ModelViewSet):
+    serializer_class = UnitCategorySerializer
 
     def get_queryset(self):
-        return UnitType.objects.all()
+        return UnitCategory.objects.all()
