@@ -1,14 +1,14 @@
 from rest_framework import serializers
-from unit_app.models import Unit, UnitType
+from unit_app.models import Unit, UnitCategory
 
 
 class UnitSerializer(serializers.ModelSerializer):
     class Meta:
         model = Unit
-        fields = ['id', 'name', 'unit_type', 'affix']
+        fields = ['id', 'name', 'unit_category', 'affix']
 
 
-class UnitTypeSerializer(serializers.ModelSerializer):
+class UnitCategorySerializer(serializers.ModelSerializer):
     class Meta:
-        model = UnitType
-        fields = ['id', 'title', 'standard']
+        model = UnitCategory
+        fields = ['id', 'category', 'standard']
