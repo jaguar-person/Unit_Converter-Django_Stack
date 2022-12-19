@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, BaseSyntheticEvent } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import { UnitType } from "../global/types";
@@ -10,23 +10,31 @@ type ConvertUnit = {
 
 const Conversion: React.FC = (): JSX.Element => {
   const [fromUnit, setFrom] = useState({} as ConvertUnit);
+  const [toUnits, setToUnits] = useState([] as UnitType[]);
+
   const [toUnit, setTo] = useState({
     id: 0,
     value: 0,
   } as ConvertUnit);
-
   const units: UnitType[] = useSelector(
     (state: RootState) => state.units.units
   );
+
+  const handleSelect = (e: BaseSyntheticEvent) => {
+    setFrom({ ...fromUnit, id: Number(e.target.value) });
+    const temp = units[Number(e.target.value) - 1].unit_category;
+    let ableUnits = units.filter((item) => item.unit_category == temp);
+    setToUnits(ableUnits)
+  };
+
   const handleConvert = () => {
     let result =
       (units[fromUnit.id - 1].affix / units[toUnit.id - 1].affix) *
       fromUnit.value;
-
     result = Number(result.toFixed(6));
-
     setTo({ ...toUnit, value: result });
   };
+
   return (
     <div className="overflow-x-auto relative mx-20">
       <div className="flex gap-16 justify-center">
@@ -45,9 +53,7 @@ const Conversion: React.FC = (): JSX.Element => {
           <select
             id="countries"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            onChange={(e) => {
-              setFrom({ ...fromUnit, id: Number(e.target.value) });
-            }}
+            onChange={handleSelect}
           >
             <option></option>
             {units &&
@@ -79,8 +85,8 @@ const Conversion: React.FC = (): JSX.Element => {
             }}
           >
             <option></option>
-            {units &&
-              units.map((item) => (
+            {toUnits &&
+              toUnits.map((item) => (
                 <option value={item.id} key={item.id}>
                   {item.name}
                 </option>

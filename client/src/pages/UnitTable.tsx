@@ -1,28 +1,39 @@
-import React, {  useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { UnitType } from "../global/types";
-import { getUnitsAsync } from "../slice/UnitSlice";
+import { UnitType, CategoryType } from "../global/types";
 import { RootState, AppDispatch } from "../store";
+import { getUnitsAsync } from "../slice/UnitSlice";
+import { getCategoriesAsync } from "../slice/CategorySlice";
+
 
 const UnitTable: React.FC = (): JSX.Element => {
   const units: UnitType[] = useSelector(
     (state: RootState) => state.units.units
   );
+  const categories: CategoryType[] = useSelector(
+    (state: RootState) => state.categories.categories
+  );
+
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getUnitsAsync());
+    dispatch(getCategoriesAsync())
   }, []);
 
   return (
     <div className="overflow-x-auto relative mx-20 text-white">
+      <Link to="/addCategory">
+        <button className="p-3 mb-3  bg-green-600 rounded-md w-full">
+          Create Category
+        </button>
+      </Link>
       <Link to="/addunit">
         <button className="p-3 mb-3  bg-green-600 rounded-md w-full">
           Add Unit
         </button>
       </Link>
-
       <table className="w-full text-sm text-center border-2 shadow-md rounded-lg">
         <thead className="text-xs uppercase bg-gray-5 bg-slate-800">
           <tr className="border">

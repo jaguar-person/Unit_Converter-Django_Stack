@@ -25,8 +25,6 @@ export const categorySlice = createSlice({
         state.categories = action.payload;
       })
       .addCase(creatCategoryAsync.fulfilled, (state, action: any) => {
-        console.log(action.payload);
-        state.categories.push(action.payload);
       });
   },
 });

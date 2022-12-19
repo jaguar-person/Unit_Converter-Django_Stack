@@ -1,17 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createUnitAsync } from "../slice/UnitSlice";
-import { AppDispatch } from "../store";
-import { UnitType } from "../global/types";
+import { RootState, AppDispatch } from "../store";
+import { CategoryType, UnitType } from "../global/types";
+// import { getCategoriesAsync } from "../slice/CategorySlice";
 
 const AddUnit: React.FC = (): JSX.Element => {
   const dispatch: AppDispatch = useDispatch();
   const [unit, setUnit] = useState({} as UnitType);
   const navigate = useNavigate();
+
+  const categories: CategoryType[] = useSelector(
+    (state: RootState) => state.categories.categories
+  );
+
+  // useEffect(() => {
+  //   dispatch(getCategoriesAsync());
+  // }, []);
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log(unit)
     dispatch(createUnitAsync(unit));
     navigate("/");
   };
@@ -37,8 +46,13 @@ const AddUnit: React.FC = (): JSX.Element => {
             setUnit({ ...unit, unit_category: Number(e.target.value) });
           }}
         >
-          <option selected>Choose a Unit Category</option>
-          <option value="1">length</option>
+          <option></option>
+          {categories &&
+            categories.map((item) => (
+              <option value={item.id} key={item.id}>
+                {item.category}
+              </option>
+            ))}
         </select>
         <label>Affix</label>
         <input
