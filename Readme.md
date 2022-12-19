@@ -27,6 +27,9 @@ You have to install something to run django well. See following commands.
     pip install -r requirements.txt
   ```
 - Step 5: build database. This project uses MySQL, so you have to install MySQL Server.
+
+  First, you have to create a database( name : unitconverter )
+
   ```
     cd server
     python manage.py makemigrations
