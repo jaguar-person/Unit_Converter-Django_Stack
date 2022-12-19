@@ -4,6 +4,7 @@ import Header from "./layouts/Header";
 import UnitTable from "./pages/UnitTable";
 import Conversion from "./pages/Conversion";
 import AddUnit from "./components/AddUnit";
+import AddCategory from "./components/AddCategory";
 import "./App.css";
 
 const App: React.FC = (): JSX.Element => {
@@ -15,6 +16,7 @@ const App: React.FC = (): JSX.Element => {
           <Route path="/" element={<UnitTable />}></Route>
           <Route path="/addunit" element={<AddUnit />}></Route>
           <Route path="/conversion" element={<Conversion />}></Route>
+          <Route path="/addCategory" element={<AddCategory />}></Route>
         </Routes>
       </div>
     </BrowserRouter>

@@ -26,8 +26,6 @@ export const unitSlice = createSlice({
         state.units = action.payload;
       })
       .addCase(createUnitAsync.fulfilled, (state, action) => {
-        console.log(action.payload);
-        // state.units.push(action.payload)
       });
   },
 });
