@@ -21,10 +21,10 @@ You have to install something to run django well. See following commands.
   py get-pip.py
   ```
 
-- Step 4: Install django framework
-
+- Step 4: Install packages
   ```
-  pip install django django-rest-framework
+    cd server
+    pip install -r requirements.txt
   ```
 - Step 5: build database. This project uses MySQL, so you have to install MySQL Server.
   ```
@@ -32,6 +32,7 @@ You have to install something to run django well. See following commands.
     python manage.py makemigrations
     python manage.py migrate
   ```
+
 ## How to use
 
 ### run server
